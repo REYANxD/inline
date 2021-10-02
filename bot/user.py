@@ -35,7 +35,10 @@ class User(TelegramClient):
 
     def __init__(self):
         session_name = TG_USER_SESSION
-        if session_name == ":memory:" or len(session_name) > 17:
+        if (
+            session_name == ":memory:" or
+            len(session_name) > 17
+        ):
             session_name = re.sub(r"[\n\s]+]", "", session_name)
             session_name = StringSession(session_name)
         super().__init__(

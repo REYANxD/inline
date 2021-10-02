@@ -18,7 +18,10 @@
 
 
 from telethon import events
-from bot import BOT
+from bot import (
+    BOT,
+    ONCB_BTN_MOSHANAM_TEXT
+)
 
 
 @BOT.on(
@@ -35,10 +38,6 @@ async def _(evt: events.CallbackQuery.Event):
     cb_data = evt.data.decode("UTF-8")
 
     await evt.answer(
-        message=(
-            "😂 don't click random buttons, "
-            "without purpose"
-        ),
+        message=ONCB_BTN_MOSHANAM_TEXT,
         alert=False
     )
-

@@ -21,7 +21,14 @@ from telethon import events
 from telethon.errors import (
     QueryIdInvalidError
 )
-from bot import BOT, SPT_NTOIQ_TEXT
+from bot import (
+    BOT,
+    SPT_NTOIQ_TEXT,
+    SPT_SRCHTGSBR_TEXT,
+    SPT_YSEQI_TEXT,
+    TG_INLINE_SRCH_CACHE_TIME,
+    TG_INLINE_SRCH_NUM_RESULTS
+)
 from bot.helper_functions.telegram_user_search import (
     search_tg
 )
@@ -32,12 +39,12 @@ from bot.helper_functions.telegram_user_search import (
 )
 async def handler(event: events.InlineQuery.Event):
     start_at = int(event.query.offset or 0)
-    limit = 9
+    limit = TG_INLINE_SRCH_NUM_RESULTS
     new_offset = str(start_at + limit)
     search_query = event.query.query
     search_results = []
     switch_pm_text_s = ""
-    cache_time = 54321
+    cache_time = TG_INLINE_SRCH_CACHE_TIME
     if search_query.strip() != "":
         search_results, usr_srch_reslts, rtbt = await search_tg(
             event.client.USER,
@@ -50,9 +57,10 @@ async def handler(event: events.InlineQuery.Event):
         if len(usr_srch_reslts) > 0:
             new_offset = str(usr_srch_reslts[-1].id)
         len_srch_ress = len(search_results)
-        switch_pm_text_s = (
-            f"Found {len_srch_ress} / {rtbt} "
-            f"results for {search_query}"
+        switch_pm_text_s = SPT_YSEQI_TEXT.fomat(
+            len_srch_ress=str(len_srch_ress),
+            rtbt=str(rtbt),
+            search_query=str(search_query)
         )
     else:
         switch_pm_text_s = SPT_NTOIQ_TEXT
@@ -75,10 +83,7 @@ async def handler(event: events.InlineQuery.Event):
             gallery=False,
             next_offset=None,
             private=False,
-            switch_pm=(
-                "search servers are busy, "
-                "please try again after sometime"
-            ),
+            switch_pm=SPT_SRCHTGSBR_TEXT,
             switch_pm_param="toolongxtion",
         )
 
