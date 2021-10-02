@@ -81,6 +81,9 @@ SIQ_IM_OIC_POL = get_config("SIQ_IM_OIC_POL")
 # additional, optional strings
 IMDB_SRCH_URL = get_config("IMDB_SRCH_URL")
 DEF_AULT_NOSRCH_IMG = get_config("DEF_AULT_NOSRCH_IMG")
+SIQ_IM_CIO_WND = get_config("SIQ_IM_CIO_WND")
+TG_DERP_ID_ONE = int(get_config("TG_DERP_ID_ONE", "X"))
+TG_DERP_ID_TWO = int(get_config("TG_DERP_ID_TWO", "Y"))
 
 
 logging.basicConfig(

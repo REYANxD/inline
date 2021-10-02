@@ -29,8 +29,8 @@ from bot import (
     TG_INLINE_SRCH_CACHE_TIME,
     TG_INLINE_SRCH_NUM_RESULTS
 )
-from bot.helpers.telegram_user_search import (
-    search_tg
+from bot.helpers.imdb_bot_srch import (
+    search_imdb_in_line
 )
 
 
@@ -46,8 +46,7 @@ async def handler(event: events.InlineQuery.Event):
     switch_pm_text_s = ""
     cache_time = TG_INLINE_SRCH_CACHE_TIME
     if search_query.strip() != "":
-        search_results, usr_srch_reslts, rtbt = await search_tg(
-            event.client.USER,
+        search_results, usr_srch_reslts, rtbt = await search_imdb_in_line(
             event.client,
             event,
             search_query,
@@ -64,8 +63,7 @@ async def handler(event: events.InlineQuery.Event):
         )
     else:
         switch_pm_text_s = SPT_NTOIQ_TEXT
-    if len(search_results) <= 0:
-        new_offset = None
+    new_offset = None
     try:
         await event.answer(
             results=search_results,
