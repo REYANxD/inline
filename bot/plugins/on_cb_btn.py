@@ -17,10 +17,19 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from telethon import events
+from telethon import events, Button
 from bot import (
     BOT,
-    ONCB_BTN_MOSHANAM_TEXT
+    LOGGER,
+    ONCB_BTN_MOSHANAM_TEXT,
+    PLEASE_WAIT_TEXT,
+    PM_MEDIA_CAPTION,
+    SPT_SRCHTGSBR_TEXT,
+    TG_DUMP_CHAT_S
+)
+from bot.sessalc.search_imd_b import search_imd_b
+from bot.helpers.telegram_user_search import (
+    search_tg
 )
 
 
@@ -37,7 +46,83 @@ async def _(evt: events.CallbackQuery.Event):
 
     cb_data = evt.data.decode("UTF-8")
 
-    await evt.answer(
-        message=ONCB_BTN_MOSHANAM_TEXT,
-        alert=False
-    )
+    if cb_data.startswith("DRWN|"):
+        _, imdb_id = cb_data.split("|")
+        imdb_response = await search_imd_b(imdb_id)
+        if imdb_response.ok:
+            try:
+                imdb_result = imdb_response.description[0]
+                await evt.answer(
+                    message=PLEASE_WAIT_TEXT,
+                    alert=False
+                )
+                search_query = f"{imdb_result.title} {imdb_result.year}"
+                mesg_capn = (
+                    f"<a href='{imdb_result.imdb_url}'>"
+                    f"{imdb_result.title} ({imdb_result.year})"
+                    "</a>"
+                )
+                start_at, limit = 0, 9
+
+                search_results, next_offset, rtbt = await search_tg(
+                    evt.client.USER,
+                    search_query,
+                    start_at,
+                    limit,
+                    is_inline=True
+                )
+                # LOGGER(__name__).info(search_results)
+                next_page_number = start_at + 1
+                # if len(search_results) == limit:
+                #     search_results.append(
+                #         [
+                #             Button.inline(
+                #                 text=NEXT_PAGE_BUTTON_TEXT,
+                #                 data=f"nfs|{next_offset}|{next_page_number}|{limit}"
+                #             )
+                #         ]
+                #     )
+                # LOGGER(__name__).info(search_results)
+                await evt.edit(
+                    buttons=search_results
+                )
+
+            except IndexError:
+                await evt.answer(
+                    message=SPT_SRCHTGSBR_TEXT,
+                    alert=True
+                )
+        else:
+            await evt.answer(
+                message=SPT_SRCHTGSBR_TEXT,
+                alert=True
+            )
+    
+    elif cb_data.startswith("igfs|"):
+        await evt.answer(
+            message=PLEASE_WAIT_TEXT,
+            alert=False
+        )
+        _, message_id, _, _ = cb_data.split("|")
+        message_id = int(message_id)
+        TG_DB_CHAT = TG_DUMP_CHAT_S[0]
+        required_message = await evt.client.get_messages(
+            entity=TG_DB_CHAT,
+            ids=message_id
+        )
+        await evt.edit(
+            text=PM_MEDIA_CAPTION,
+            file=required_message.media,
+            buttons=[
+                Button.inline(
+                    text="go back",
+                    data=evt.data
+                )
+            ]
+        )
+
+    else:
+        await evt.answer(
+            message=ONCB_BTN_MOSHANAM_TEXT,
+            alert=False
+        )

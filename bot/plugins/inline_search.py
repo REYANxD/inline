@@ -46,17 +46,15 @@ async def handler(event: events.InlineQuery.Event):
     switch_pm_text_s = ""
     cache_time = TG_INLINE_SRCH_CACHE_TIME
     if search_query.strip() != "":
-        search_results, usr_srch_reslts, rtbt = await search_imdb_in_line(
+        search_results, rtbt = await search_imdb_in_line(
             event.client,
             event,
             search_query,
             start_at,
             limit
         )
-        if len(usr_srch_reslts) > 0:
-            new_offset = str(usr_srch_reslts[-1].id)
         len_srch_ress = len(search_results)
-        switch_pm_text_s = SPT_YSEQI_TEXT.fomat(
+        switch_pm_text_s = SPT_YSEQI_TEXT.format(
             len_srch_ress=str(len_srch_ress),
             rtbt=str(rtbt),
             search_query=str(search_query)

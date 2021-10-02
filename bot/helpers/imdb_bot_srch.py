@@ -40,9 +40,12 @@ async def search_imdb_in_line(
 ):
     imdb_api_resps = await search_imd_b(sqr)
     search_results = []
-    t_r = None
     if imdb_api_resps.ok:
         for imdb_res in imdb_api_resps.description:
+            if not imdb_res.imdb_id.startswith("tt"):
+                # we only need movie titles,
+                # not personalities
+                continue
             mesg_capn = (
                 f"<a href='{imdb_res.imdb_url}'>"
                 f"{imdb_res.title} ({imdb_res.year})"
@@ -98,4 +101,4 @@ async def search_imdb_in_line(
                 )
             )
 
-    return search_results, t_r
+    return search_results, len(search_results)

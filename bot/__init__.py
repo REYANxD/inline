@@ -45,7 +45,7 @@ TG_BOT_TOKEN = get_config("TG_BOT_TOKEN", should_prompt=True)
 TG_USER_SESSION = get_config("TG_USER_SESSION", should_prompt=True)
 # search chat id
 TG_DUMP_CHAT_S = [
-    get_config("TG_DUMP_CHAT", should_prompt=True)
+    int(get_config("TG_DUMP_CHAT", should_prompt=True))
 ]
 TG_BOT_SESSION = get_config("TG_BOT_SESSION", "bot")
 # maximum message length in Telegram
@@ -84,6 +84,8 @@ DEF_AULT_NOSRCH_IMG = get_config("DEF_AULT_NOSRCH_IMG")
 SIQ_IM_CIO_WND = get_config("SIQ_IM_CIO_WND")
 TG_DERP_ID_ONE = int(get_config("TG_DERP_ID_ONE", "X"))
 TG_DERP_ID_TWO = int(get_config("TG_DERP_ID_TWO", "Y"))
+PLEASE_WAIT_TEXT = get_config("PLEASE_WAIT_TEXT")
+PM_MEDIA_CAPTION = get_config("PM_MEDIA_CAPTION", " ")
 
 
 logging.basicConfig(
