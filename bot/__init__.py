@@ -78,6 +78,9 @@ SPT_YSEQI_TEXT = get_config("SPT_YSEQI_TEXT")
 SPT_SRCHTGSBR_TEXT = get_config("SPT_SRCHTGSBR_TEXT")
 ONCB_BTN_MOSHANAM_TEXT = get_config("ONCB_BTN_MOSHANAM_TEXT")
 SIQ_IM_OIC_POL = get_config("SIQ_IM_OIC_POL")
+# additional, optional strings
+IMDB_SRCH_URL = get_config("IMDB_SRCH_URL")
+DEF_AULT_NOSRCH_IMG = get_config("DEF_AULT_NOSRCH_IMG")
 
 
 logging.basicConfig(
