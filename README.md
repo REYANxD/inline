@@ -1,7 +1,8 @@
 ## ~~(yet another)~~ Media Search Bot
 
-* Index channel/group files for inline search.
-* Supports document, video and audio file formats with caption.
+* Index channel files for inline search.
+* [Supports document, video and audio file formats with caption](https://github.com/SpEcHiDe/Media-Search-bot/tree/2b35100c7a09e971d036694f654bb96946b51c84).
+* [Supports IMDb searching](https://github.com/SpEcHiDe/Media-Search-bot/tree/38eb20525fc1abc059de27f0259ab864f12d576c).
 * No database, is used in the development of this bot.
 
 ### Environment Variables

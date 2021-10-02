@@ -64,25 +64,13 @@ async def _(evt: events.CallbackQuery.Event):
                 )
                 start_at, limit = 0, 9
 
-                search_results, next_offset, rtbt = await search_tg(
+                search_results, _, __ = await search_tg(
                     evt.client.USER,
                     search_query,
                     start_at,
                     limit,
                     is_inline=True
                 )
-                # LOGGER(__name__).info(search_results)
-                next_page_number = start_at + 1
-                # if len(search_results) == limit:
-                #     search_results.append(
-                #         [
-                #             Button.inline(
-                #                 text=NEXT_PAGE_BUTTON_TEXT,
-                #                 data=f"nfs|{next_offset}|{next_page_number}|{limit}"
-                #             )
-                #         ]
-                #     )
-                # LOGGER(__name__).info(search_results)
                 await evt.edit(
                     buttons=search_results
                 )
@@ -113,12 +101,7 @@ async def _(evt: events.CallbackQuery.Event):
         await evt.edit(
             text=PM_MEDIA_CAPTION,
             file=required_message.media,
-            buttons=[
-                Button.inline(
-                    text="go back",
-                    data=evt.data
-                )
-            ]
+            buttons=[]
         )
 
     else:
