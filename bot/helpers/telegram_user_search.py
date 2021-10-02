@@ -19,10 +19,10 @@
 
 from telethon import Button, events, TelegramClient
 from bot import (
-    SIQ_IM_OIC_POL,   
+    SIQ_IM_OIC_POL,
     TG_DUMP_CHAT_S
 )
-from bot.helper_functions.human_bytes import humanbytes
+from .human_bytes import humanbytes
 
 
 async def search_tg(
@@ -91,9 +91,11 @@ def get_apprt_bldr(event, sqr, sltm):
         title=title,
         description=description,
         text=caption,
-        buttons=[Button.switch_inline(
-            text=SIQ_IM_OIC_POL,
-            query=sqr,
-            same_peer=True
-        )]
+        buttons=[
+            Button.switch_inline(
+                text=SIQ_IM_OIC_POL,
+                query=sqr,
+                same_peer=True
+            )
+        ]
     )

@@ -29,7 +29,7 @@ from bot import (
     TG_INLINE_SRCH_CACHE_TIME,
     TG_INLINE_SRCH_NUM_RESULTS
 )
-from bot.helper_functions.telegram_user_search import (
+from bot.helpers.telegram_user_search import (
     search_tg
 )
 
@@ -86,4 +86,3 @@ async def handler(event: events.InlineQuery.Event):
             switch_pm=SPT_SRCHTGSBR_TEXT,
             switch_pm_param="toolongxtion",
         )
-

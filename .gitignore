@@ -1,6 +1,7 @@
 venv
-config.env
+*.env
+!sample_config.env
 **/__pycache__*
 **/*.session*
 **/*.log*
-DOWNLOADS/*
+.vscode
