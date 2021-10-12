@@ -62,7 +62,7 @@ async def search_imd_b(search_query: str) -> IMDb:
                 koda.get("#IMDb_TITLE_TYPE"),
                 koda.get("#IMDb_SHORT_DESC"),
                 koda.get("#MARINTG"),
-                koda.get("#GENRE"),
+                koda.get("#GENRE", []),
                 user_rating
             )
         )

@@ -50,11 +50,17 @@ async def search_imdb_in_line(
                 f"<a href='{imdb_res.imdb_url}'>"
                 f"{imdb_res.title} ({imdb_res.year})"
                 "</a>"
-                "\n\n"
-                f"<b>Genre</b>: #{' #'.join(imdb_res.genre)}"
-                "\n\n"
-                f"<b>Rating</b>: {imdb_res.user_rating}"
             )
+            if len(imdb_res.genre) > 0:
+                mesg_capn += (
+                    "\n\n"
+                    f"<b>Genre</b>: #{' #'.join(imdb_res.genre)}"
+                )
+            if imdb_res.user_rating:
+                mesg_capn += (
+                    "\n\n"
+                    f"<b>Rating</b>: {imdb_res.user_rating}"
+                )
             conteent = InputWebDocument(
                 url=imdb_res.photo_url.replace(
                     "._V1_",
