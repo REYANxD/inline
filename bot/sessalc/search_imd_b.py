@@ -39,7 +39,7 @@ async def search_imd_b(search_query: str) -> IMDb:
         user_rating = None
         if rating_:
             one = rating_.get("#ONLYRATING")
-            two = rating_.get("#ONLYRATING")
+            two = rating_.get("#MAXRATING")
             three = rating_.get("#NUMUSERRATINGS")
             user_rating = (
                 f"⭐️ {one} / {two} (👀 {three})"
