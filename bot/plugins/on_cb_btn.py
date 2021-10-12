@@ -17,10 +17,9 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from telethon import events, Button
+from telethon import events
 from bot import (
     BOT,
-    LOGGER,
     ONCB_BTN_MOSHANAM_TEXT,
     PLEASE_WAIT_TEXT,
     PM_MEDIA_CAPTION,
@@ -57,11 +56,6 @@ async def _(evt: events.CallbackQuery.Event):
                     alert=False
                 )
                 search_query = f"{imdb_result.title} {imdb_result.year}"
-                mesg_capn = (
-                    f"<a href='{imdb_result.imdb_url}'>"
-                    f"{imdb_result.title} ({imdb_result.year})"
-                    "</a>"
-                )
                 start_at, limit = 0, 9
 
                 search_results, _, __ = await search_tg(
@@ -85,7 +79,7 @@ async def _(evt: events.CallbackQuery.Event):
                 message=SPT_SRCHTGSBR_TEXT,
                 alert=True
             )
-    
+
     elif cb_data.startswith("igfs|"):
         await evt.answer(
             message=PLEASE_WAIT_TEXT,

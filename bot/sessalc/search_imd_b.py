@@ -19,7 +19,7 @@
 
 import httpx
 from bot import IMDB_SRCH_URL, DEF_AULT_NOSRCH_IMG
-from ..sessalc.imdb import IMDb, IMDbResult
+from .imdb import IMDb, IMDbResult
 
 
 async def search_imd_b(search_query: str) -> IMDb:
@@ -32,16 +32,24 @@ async def search_imd_b(search_query: str) -> IMDb:
             }
         )
     api_response = resp_one.json()
-    return IMDb(
-        api_response.get("ok"),
-        api_response.get("error_code"),
-        [
+    imdb_src_resps = api_response.get("description")
+    imdb_reslts = []
+    for koda in imdb_src_resps:
+        rating_ = koda.get("#RATING")
+        user_rating = None
+        if rating_:
+            one = rating_.get("#ONLYRATING")
+            two = rating_.get("#ONLYRATING")
+            three = rating_.get("#NUMUSERRATINGS")
+            user_rating = (
+                f"⭐️ {one} / {two} (👀 {three})"
+            )
+        imdb_reslts.append(
             IMDbResult(
                 koda.get("#IMDB_ID"),
                 koda.get("#TITLE"),
                 koda.get("#YEAR"),
                 koda.get("#AKA"),
-                koda.get("#IMDb_TITLE_TYPE"),
                 koda.get("#IMDB_URL"),
                 koda.get("#IMDB_IV"),
                 koda.get("#ACTORS"),
@@ -51,6 +59,15 @@ async def search_imd_b(search_query: str) -> IMDb:
                 ),
                 int(koda.get("photo_width", "640")),
                 int(koda.get("photo_height", "640")),
-            ) for koda in api_response.get("description")
-        ]
+                koda.get("#IMDb_TITLE_TYPE"),
+                koda.get("#IMDb_SHORT_DESC"),
+                koda.get("#MARINTG"),
+                koda.get("#GENRE"),
+                user_rating
+            )
+        )
+    return IMDb(
+        api_response.get("ok"),
+        api_response.get("error_code"),
+        imdb_reslts
     )

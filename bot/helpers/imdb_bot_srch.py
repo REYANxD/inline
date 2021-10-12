@@ -50,6 +50,10 @@ async def search_imdb_in_line(
                 f"<a href='{imdb_res.imdb_url}'>"
                 f"{imdb_res.title} ({imdb_res.year})"
                 "</a>"
+                "\n\n"
+                f"<b>Genre</b>: #{' #'.join(imdb_res.genre)}"
+                "\n\n"
+                f"<b>Rating</b>: {imdb_res.user_rating}"
             )
             conteent = InputWebDocument(
                 url=imdb_res.photo_url.replace(
@@ -73,7 +77,7 @@ async def search_imdb_in_line(
                 mime_type="image/jpeg",
                 attributes=[]
             )
-            
+
             search_results.append(
                 InputBotInlineResult(
                     id=f"{imdb_res.imdb_id} {astr} {lmtn}",

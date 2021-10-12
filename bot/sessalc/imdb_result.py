@@ -18,7 +18,7 @@
 
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 
 @dataclass
@@ -27,10 +27,14 @@ class IMDbResult:
     title: str
     year: str
     aka: str
-    imdb_title_type: str
     imdb_url: str
     tg_iv_url: str
     actors: str
     photo_url: Optional[str]
     photo_width: Optional[int]
     photo_height: Optional[int]
+    imdb_title_type: Optional[str]
+    imdb_short_description: Optional[str]
+    content_rating: Optional[str]
+    genre: Optional[List[str]]
+    user_rating: Optional[str]
