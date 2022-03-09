@@ -34,7 +34,7 @@
         },
         "TG_DUMP_CHAT": {
             "description": "Username or ID of channel or group.",
-             "value": ""
+            "value": ""
         }
     },
     "addons": [],
