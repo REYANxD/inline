@@ -1,46 +1,48 @@
 {
     "name": "Media Search bot",
-    "description": "easily share private channel files using Telegram InLine search, without database",
+    "description": "When you going to send file on telegram channel/group this bot will save that in database, So you can search that easily in inline mode",
     "keywords": [
       "telegram",
       "best",
       "indian",
-      "telethon",
+      "pyrogram",
       "media",
       "search",
       "channel",
       "index",
       "inline"
     ],
-    "website": "https://github.com/SpEcHiDe/Media-Search-bot",
-    "repository": "https://github.com/SpEcHiDe/Media-Search-bot",
+    "website": "https://github.com/Mahesh0253/Media-Search-bot",
+    "repository": "https://github.com/Mahesh0253/Media-Search-bot",
     "env": {
         "TG_BOT_TOKEN": {
             "description": "Your bot token.",
             "value": ""
         },
-        "APP_ID": {
+        "TG_USER_SESSION": {
+            "description": "User bot string session.",
+            "value": "",
+            "required": false
+        },
+        "API_ID": {
             "description": "Get this value from https://my.telegram.org",
             "value": ""
-         },
+        },
         "API_HASH": {
             "description": "Get this value from https://my.telegram.org",
             "value": ""
         },
-        "TG_USER_SESSION": {
-            "description": "Your String Session",
-             "value": ""
-             "required": false
-        },
         "TG_DUMP_CHAT": {
-            "description": "Username or ID of channel or group.",
+            "description": "Username or ID of channel or group. Separate multiple IDs by space.",
             "value": ""
         }
-    },
+        },
     "addons": [],
-    "buildpacks": [{
-        "url": "heroku/python"
-    }],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
     "formation": {
         "worker": {
             "quantity": 1,
