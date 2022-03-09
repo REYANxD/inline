@@ -16,19 +16,25 @@
     "repository": "https://github.com/SpEcHiDe/Media-Search-bot",
     "env": {
         "TG_BOT_TOKEN": {
-            "description": "Your bot token."
+            "description": "Your bot token.",
+            "value": ""
         },
         "APP_ID": {
-            "description": "Get this value from https://my.telegram.org"
-        },
+            "description": "Get this value from https://my.telegram.org",
+            "value": ""
+         },
         "API_HASH": {
             "description": "Get this value from https://my.telegram.org",
+            "value": ""
         },
         "TG_USER_SESSION": {
-            "description": "Your String Session"
+            "description": "Your String Session",
+             "value": ""
+             "required": false
         },
         "TG_DUMP_CHAT": {
-            "description": "Username or ID of channel or group."
+            "description": "Username or ID of channel or group.",
+             "value": ""
         }
     },
     "addons": [],
